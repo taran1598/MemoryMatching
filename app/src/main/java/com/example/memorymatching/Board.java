@@ -58,11 +58,7 @@ public class Board extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(getApplicationContext(),GridItemActivity.class);
-//               // intent.putExtra("name",names[i]);
-//                //intent.putExtra("image",images[i]);
-//                startActivity(intent);
-                ImageView image1 = new ImageView(MemoryMatching.getContext());
+
 
             }
         });
@@ -71,6 +67,26 @@ public class Board extends AppCompatActivity {
 
 
     }
+
+    public void flip(View v) {
+        ViewFlipper viewFlipper = (ViewFlipper) v;
+        //ViewFlipper viewFlipper = findViewById(R.id.card_flipper);
+        if (viewFlipper.getDisplayedChild() == 0) {
+            viewFlipper.setDisplayedChild(1);
+        } else {
+            viewFlipper.setDisplayedChild(0);
+        }
+    }
+
+//    public void flip_To_Front(View v) {
+//        ViewFlipper v1 = findViewById(R.id.card_flipper);
+//        v1.setDisplayedChild(0);
+//    }
+//
+//    public void flip_To_Back(View v) {
+//        ViewFlipper v1 = findViewById(R.id.card_flipper);
+//        v1.setDisplayedChild(1);
+//    }
 
     /**
      * Creates card objects from the card url where the picture is stored
@@ -123,16 +139,63 @@ public class Board extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view1 = getLayoutInflater().inflate(R.layout.row_data,null);
+            View view1 = getLayoutInflater().inflate(R.layout.card_flip_view,null);
             //getting view in row_data
             //TextView name = view1.findViewById(R.id.imageName);
-            ImageView image = view1.findViewById(R.id.images);
+            ImageView image_front = view1.findViewById(R.id.front_image);
+            ImageView image_back = view1.findViewById(R.id.back_image);
 
             //name.setText(names[position]);
             //image.setImageResource(images[position]);
-            new DownloadImagesTask(image).execute(cards.get(position).getCardName());
+            new DownloadImagesTask(image_back).execute(cards.get(position).getCardName());
+            image_front.setImageResource(R.drawable.card_back);
+
+            // set onClick listener
+//            final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.card_flipper);
+//
+//            viewFlipper.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    flip_image_view(viewFlipper);
+//                }
+//            });
             return view1;
 
+        }
+
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            View view = convertView;
+//            View view1 = getLayoutInflater().inflate(R.layout.card_flip_view,null);
+//            //getting view in row_data
+//            //TextView name = view1.findViewById(R.id.imageName);
+//            ImageView image_front = view1.findViewById(R.id.front_image);
+//            ImageView image_back = view1.findViewById(R.id.back_image);
+//
+//            //name.setText(names[position]);
+//            //image.setImageResource(images[position]);
+//            new DownloadImagesTask(image_front).execute(cards.get(position).getCardName());
+//            image_back.setImageResource(R.drawable.card_back);
+//
+//            // set onClick listener
+////            final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.card_flipper);
+////
+////            viewFlipper.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    flip_image_view(viewFlipper);
+////                }
+////            });
+//            return view1;
+//
+//        }
+
+        public void flip_image_view (ViewFlipper v) {
+            if (v.getDisplayedChild() == 0) {
+                v.setDisplayedChild(1);
+            } else {
+                v.setDisplayedChild(0);
+            }
         }
 
 
@@ -162,12 +225,7 @@ public class Board extends AppCompatActivity {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
-            //getbmImage();
         }
-
-//        private ImageView getbmImage() {
-//            return this.bmImage;
-//        }
     }
 
 
