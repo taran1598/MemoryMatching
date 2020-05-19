@@ -39,6 +39,10 @@ public class MemoryMatching extends Activity implements AsyncResponse{
 
     }
 
+    public static Context getContext() {
+        return context;
+    }
+
 
     @Override
     public void processFinish(final ArrayList<String> strings) {

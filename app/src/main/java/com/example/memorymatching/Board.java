@@ -58,10 +58,11 @@ public class Board extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(),GridItemActivity.class);
-               // intent.putExtra("name",names[i]);
-                //intent.putExtra("image",images[i]);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(),GridItemActivity.class);
+//               // intent.putExtra("name",names[i]);
+//                //intent.putExtra("image",images[i]);
+//                startActivity(intent);
+                ImageView image1 = new ImageView(MemoryMatching.getContext());
 
             }
         });
