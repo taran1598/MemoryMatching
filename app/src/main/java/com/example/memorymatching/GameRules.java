@@ -17,6 +17,14 @@ public class GameRules {
         this.num_cards_to_match_to_win = num_cards_to_match_to_win;
     }
 
+    public int num_points(ArrayList<Card> cards) throws CardsException {
+        if (cardsEqual(cards)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * Checks to see if all cards in the list cards are equal
      * @param cards: List of Card objects
