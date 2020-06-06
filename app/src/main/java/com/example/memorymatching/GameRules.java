@@ -17,6 +17,12 @@ public class GameRules {
         this.num_cards_to_match_to_win = num_cards_to_match_to_win;
     }
 
+    /**
+     * Abstraction that allows num points awarded to be changed.
+     * @param cards: list of cards that are selected
+     * @return: points > 0 if corrent o.w 0
+     * @throws CardsException
+     */
     public int num_points(ArrayList<Card> cards) throws CardsException {
         if (cardsEqual(cards)) {
             return 1;

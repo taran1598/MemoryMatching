@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".Board">
 
+
     <TextView
         android:id="@+id/points"
         android:layout_width="wrap_content"
@@ -12,7 +13,6 @@
         android:text="Points 0">
 
     </TextView>
-
 
     <GridView
         android:id="@+id/gridview"
