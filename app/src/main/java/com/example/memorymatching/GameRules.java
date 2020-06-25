@@ -7,8 +7,13 @@ import com.example.memorymatching.exception.CardsException;
 
 public class GameRules {
 
+
+
+
     private int num_cards_to_match = 2;
+
     private int num_cards_to_match_to_win = 10;
+
     private int num_players  = 2;
 
     public GameRules(int num_cards_to_match, int num_players, int num_cards_to_match_to_win) {
@@ -49,5 +54,29 @@ public class GameRules {
             }
         }
         return equal;
+    }
+
+    public void setNum_cards_to_match(int num_cards_to_match) {
+        this.num_cards_to_match = num_cards_to_match;
+    }
+
+    public void setNum_cards_to_match_to_win(int num_cards_to_match_to_win) {
+        this.num_cards_to_match_to_win = num_cards_to_match_to_win;
+    }
+
+    public void setNum_players(int num_players) {
+        this.num_players = num_players;
+    }
+
+    public int getNum_cards_to_match() {
+        return num_cards_to_match;
+    }
+
+    public int getNum_cards_to_match_to_win() {
+        return num_cards_to_match_to_win;
+    }
+
+    public int getNum_players() {
+        return num_players;
     }
 }

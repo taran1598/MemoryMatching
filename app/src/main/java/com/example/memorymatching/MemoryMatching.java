@@ -1,5 +1,6 @@
 package com.example.memorymatching;
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Inet4Address;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -24,6 +26,8 @@ import java.util.Objects;
 public class MemoryMatching extends Activity implements AsyncResponse{
 
     private static Context context;
+    private GameRules gameRules;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,16 +37,28 @@ public class MemoryMatching extends Activity implements AsyncResponse{
         setContentView(R.layout.activity_main);
         String jsonEndpoint = "https://shopicruit.myshopify.com/admin/products.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6";
         new GetImageURLs(this).execute(jsonEndpoint);
+        gameRules = new GameRules(2,1,10);
 
-
-
+        Button rules = (Button) findViewById(R.id.rules_main_menu_button);
+        rules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rules_intent = new Intent(getApplicationContext(), Rules.class);
+                startActivityForResult(rules_intent, 1); //TODO: create constants for request codes.
+            }
+        });
 
     }
 
-    public static Context getContext() {
-        return context;
-    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            gameRules.setNum_cards_to_match(data.getIntExtra("num_cards_to_match", 2));
+            gameRules.setNum_cards_to_match_to_win(data.getIntExtra("num_cards_to_match_to_win", 10));
+        }
+    }
 
     @Override
     public void processFinish(final ArrayList<String> strings) {
@@ -52,9 +68,9 @@ public class MemoryMatching extends Activity implements AsyncResponse{
             public void onClick(View v) {
                 Intent board_activity = new Intent(getApplicationContext(), Board.class);
                 board_activity.putStringArrayListExtra("ImageURLs", strings);
-                board_activity.putExtra("num_cards_to_match", 2);
-                board_activity.putExtra("num_players", 1);
-                board_activity.putExtra("num_cards_to_match_to_win", 10);
+                board_activity.putExtra("num_cards_to_match", gameRules.getNum_cards_to_match());
+                board_activity.putExtra("num_players", gameRules.getNum_players());
+                board_activity.putExtra("num_cards_to_match_to_win", gameRules.getNum_cards_to_match_to_win());
                 startActivity(board_activity);
             }
         });

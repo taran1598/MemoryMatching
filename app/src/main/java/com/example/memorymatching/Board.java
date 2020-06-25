@@ -225,8 +225,8 @@ public class Board extends AppCompatActivity {
             ImageView image_front = view1.findViewById(R.id.front_image);
             ImageView image_back = view1.findViewById(R.id.back_image);
 
-            new DownloadImagesTask(image_front).execute(cards.get(position).getCardName());
-            image_back.setImageResource(R.drawable.card_back);
+            new DownloadImages(image_front).execute(cards.get(position).getCardName()); // set image for front of card
+            image_back.setImageResource(R.drawable.card_back); // set image for back of card
 
             return view1;
 
@@ -236,29 +236,29 @@ public class Board extends AppCompatActivity {
     /**
      * Async class that downloads image from url to ImageView
      */
-    private class DownloadImagesTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-        public DownloadImagesTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap bitmap = null;
-            try {
-                InputStream is = new URL(urldisplay).openStream();
-                bitmap = BitmapFactory.decodeStream(is);
-            } catch (IOException e) {
-                Log.e("Error", Objects.requireNonNull(e.getMessage()));
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
+//    private class DownloadImagesTask extends AsyncTask<String, Void, Bitmap> {
+//        ImageView bmImage;
+//        public DownloadImagesTask(ImageView bmImage) {
+//            this.bmImage = bmImage;
+//        }
+//
+//        protected Bitmap doInBackground(String... urls) {
+//            String urldisplay = urls[0];
+//            Bitmap bitmap = null;
+//            try {
+//                InputStream is = new URL(urldisplay).openStream();
+//                bitmap = BitmapFactory.decodeStream(is);
+//            } catch (IOException e) {
+//                Log.e("Error", Objects.requireNonNull(e.getMessage()));
+//                e.printStackTrace();
+//            }
+//            return bitmap;
+//        }
+//
+//        protected void onPostExecute(Bitmap result) {
+//            bmImage.setImageBitmap(result);
+//        }
+//    }
 
 
 

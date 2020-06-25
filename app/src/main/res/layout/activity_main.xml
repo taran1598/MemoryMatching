@@ -23,4 +23,12 @@
         android:layout_marginLeft="150dp"
         android:layout_marginTop="150dp"
         android:text="Start Game" />
+
+    <Button
+        android:id="@+id/rules_main_menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Rules"
+        android:backgroundTint="#43E309"/>
 </LinearLayout>

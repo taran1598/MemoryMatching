@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".End_Screen"></activity>
+        <activity android:name=".Rules"></activity>
+        <activity android:name=".End_Screen" />
         <activity android:name=".GridItemActivity" />
         <activity
             android:name=".MemoryMatching"
